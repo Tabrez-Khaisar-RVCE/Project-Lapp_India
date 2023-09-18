@@ -1,0 +1,382 @@
+#:import Login_Page Login_Page
+# Dashboard Dashboard
+#: import Report Report
+#: import Admin Admin
+#:import Factory kivy.factory.Factory
+# Navigation between screens
+
+<Screen_Manager>:
+    Screen:
+        name:'Login Page'
+        LoginPage:
+    Dashboard:
+        name:'Home Page'
+
+<Dashboard>:
+    on_enter:root.TopBar_Display()
+
+    BoxLayout:
+        orientation:'vertical'
+        canvas.before:
+            Color:
+                rgba:(1,1,1,1)
+            Rectangle:
+                size:self.size
+                pos:self.pos
+
+        BoxLayout:
+            id:top_info
+            size_hint_y:None
+            height:'50dp'
+            canvas.before:
+                Color:
+                    rgba:(1, 92/255, 0,0.9)
+                Rectangle:
+                    size:self.size
+                    pos:self.pos
+
+            BoxLayout:
+                size_hint:None,None
+                size:'180dp','50dp'
+                padding:('25dp','25dp','10dp','10dp')
+                canvas.before:
+                    Color:
+                        rgba:(1, 92/255, 0,0.8)
+                    Rectangle:
+                        size:self.size
+                        pos:self.pos
+                Image:
+                    size_hint:None,None
+                    size:'50dp','30dp'
+                    source:'Design_considerations\Images\Lapp_Logo.jpg'
+                Label:
+                    size_hint:None,None
+                    size:'50dp','30dp'
+                    text:'      LAPP'
+                    font_size:'30dp'
+                    bold:True
+            BoxLayout:
+                padding:('5dp','5dp','5dp','5dp')
+                spacing:'5dp'
+                # FlatButton:
+                #     background_color:(0.35294, 0.19607, 0.19607,1)
+                #     size_hint:None,None
+                #     size:'30dp','35dp'
+                #     text:'<'
+                #     bold:True
+                #     font_size:'35dp'
+                #     halign: 'center'
+                #     valign: 'bottom'
+                #     text_size: self.width - dp(5), self.height - dp(1)
+                #     on_release:root.parent.parent.pop()
+                Label:
+
+
+            StackLayout:
+                orientation:'rl-tb'
+                padding:('10dp','10dp','10dp','10dp')
+                spacing:'10dp'
+                size_hint_x:None
+                width:'650dp'
+
+                GridLayout:
+                    rows:1
+                    cols:2
+                    size_hint:None,None
+                    size:'160dp','30dp'
+                    BackgroundLabel:
+                        size_hint_x:None
+                        width:'120dp'
+                        text:'Access Level'
+                        font_size:'14dp'
+                        background_color: (196/255, 196/255, 196/255, 1)
+                        color:0,0,0,1
+                    BackgroundLabel:
+                        id:Access_Level_Display
+                        size_hint_x:None
+                        width:'40dp'
+                        text:'3'
+                        font_size:'12dp'
+                        bold:True
+                        background_color: (90/255, 50/255, 50/255, 1)
+
+                GridLayout:
+                    rows:1
+                    cols:2
+                    size_hint:None,None
+                    size:'160dp','30dp'
+                    BackgroundLabel:
+                        size_hint_x:None
+                        width:'120dp'
+                        text:'Plant ID'
+                        font_size:'14dp'
+                        background_color: (196/255, 196/255, 196/255, 1)
+                        color:0,0,0,1
+                    BackgroundLabel:
+                        id:T_B_Plant_ID
+                        size_hint_x:None
+                        width:'40dp'
+                        text:'6186'
+                        font_size:'12dp'
+                        bold:True
+                        background_color: (90/255, 50/255, 50/255, 1)
+
+                BackgroundLabel:
+                    id:TOP_BAR_Username
+                    size_hint_x:None
+                    width:'160dp'
+                    font_size:'25dp'
+                    halign: 'right'
+                    valign: 'center'
+                    text_size:self.size
+                    text:'root.parent.ids.piTopBar_Details()'
+        BoxLayout:
+            SideBar:
+                size_hint_x:None
+                width:'180dp'
+            Push_Pop_screens:
+                id:manage_screen
+                Screen:
+                    name:'Dashboard_Info'
+
+                    MiddlePanel:
+                        id:_Notification
+                        do_default_tab:False
+
+                        MiddlePanelItem:
+                            id:DASH_NOTI_Info
+                            text:'[u]Information[/u]'
+                            on_release:DASH_NOTI_Download.text='Download';DASH_NOTI_Info.text='[u]Information[/u]'
+                            Label:
+                                text:'Coming soon'
+                                color:(0,1,0,1)
+
+                        MiddlePanelItem:
+                            id:DASH_NOTI_Download
+                            text:'Download'
+                            on_release:DASH_NOTI_Info.text='Information';DASH_NOTI_Download.text='[u]Download[/u]'
+                            Label:
+                                text:'Coming soon'
+                                color:(1,0,0,1)
+
+                Screen:
+                    name:'Inspection_Export'
+
+                    MiddlePanel:
+                        do_default_tab:False
+
+                        MiddlePanelItem:
+                            id:INS_EXP_Report
+                            text:'[u]Report[/u]'
+                            on_release:INS_EXP_Download.text='Download';INS_EXP_Report.text='[u]Report[/u]'
+                            Label:
+                                text:'Coming soon'
+                                color:(0,1,0,1)
+
+                        MiddlePanelItem:
+                            id:INS_EXP_Download
+                            text:'Download'
+                            on_release:INS_EXP_Report.text='Report';INS_EXP_Download.text='[u]Download[/u]'
+                            Label:
+                                text:'Coming soon'
+                                color:(1,0,0,1)
+                Screen:
+                    name:'Inspection_Import'
+
+                    MiddlePanel:
+                        do_default_tab:False
+
+                        MiddlePanelItem:
+                            id:INS_IMP_PurchaseOrder
+                            text:'[u]Purchase Order[/u]'
+                            on_release:INS_IMP_PurchaseOrder.text='[u]Purchase Order[/u]'
+                            Label:
+                                text:'Coming soon'
+                                color:(0,1,0,1)
+                Screen:
+                    name:'Inspection_Modify'
+
+                    MiddlePanel:
+                        do_default_tab:False
+
+                        MiddlePanelItem:
+                            id:INS_MOD_Data
+                            text:'[u]Data[/u]'
+                            on_release:INS_MOD_Data.text='[u]Data[/u]'
+                            Label:
+                                text:'Coming soon'
+                                color:(0,1,0,1)
+
+                Screen:
+                    name:'Report_Export'
+
+                    MiddlePanel:
+                        do_default_tab:False
+
+                        MiddlePanelItem:
+                            id:REP_EXP_Report
+                            text:'[u]Report[/u]'
+                            on_release:REP_EXP_Download.text='Download';REP_EXP_Report.text='[u]Report[/u]'
+                            REP_EXP_Report:
+
+                        MiddlePanelItem:
+                            id:REP_EXP_Download
+                            text:'Download'
+                            on_release:REP_EXP_Report.text='Report';REP_EXP_Download.text='[u]Download[/u]'
+                            Label:
+                                text:'Coming soon'
+                                color:(1,0,0,1)
+                Screen:
+                    name:'Report_Import'
+                    MiddlePanel:
+                        do_default_tab:False
+
+                        MiddlePanelItem:
+                            id:REP_IMP_WorkOrder
+                            text:'[u]Work Order[/u]'
+                            on_release:REP_IMP_WorkOrder.text='[u]Work Order[/u]'
+                            REP_IMP_WorkOrder:
+                Screen:
+                    name:'Report_Modify'
+                    MiddlePanel:
+                        do_default_tab:False
+
+                        MiddlePanelItem:
+                            id:REP_MOD_PartNumber
+                            text:'[u]Part Number[/u]'
+                            on_release:REP_MOD_Tools.text='Tools';REP_MOD_WorkOrder.text='Work Order';REP_MOD_PartNumber.text='[u]Part Number[/u]';REP_MOD_Terminal.text='Terminal';REP_MOD_Component.text='Component'
+                            Label:
+                                text:'Coming soon'
+                                color:(0,1,0,1)
+
+                        MiddlePanelItem:
+                            id:REP_MOD_Tools
+                            text:'Tools'
+                            on_release:REP_MOD_WorkOrder.text='Work Order';REP_MOD_PartNumber.text='Part Number';REP_MOD_Tools.text='[u]Tools[/u]';REP_MOD_Terminal.text='Terminal';REP_MOD_Component.text='Component'
+                            Label:
+                                text:'Coming soon'
+                                color:(1,0,0,1)
+
+                        MiddlePanelItem:
+                            id:REP_MOD_WorkOrder
+                            text:'Work Order'
+                            on_release:REP_MOD_PartNumber.text='Part Number';REP_MOD_Tools.text='Tools';REP_MOD_WorkOrder.text='[u]Work Order[/u]';REP_MOD_Terminal.text='Terminal';REP_MOD_Component.text='Component'
+                            REP_MOD_WorkOrder_modify:
+
+                        MiddlePanelItem:
+                            id:REP_MOD_Terminal
+                            text:'Terminal'
+                            on_release:REP_MOD_Terminal.text='[u]Terminal[/u]';REP_MOD_PartNumber.text='Part Number';REP_MOD_Tools.text='Tools';REP_MOD_WorkOrder.text='Work Order';REP_MOD_Component.text='Component'
+                            REP_MOD_Terminal:
+
+                        MiddlePanelItem:
+                            id:REP_MOD_Component
+                            text:'Component'
+                            on_release:REP_MOD_Component.text='[u]Component[/u]';REP_MOD_PartNumber.text='Part Number';REP_MOD_Tools.text='Tools';REP_MOD_WorkOrder.text='Work Order';REP_MOD_Terminal.text='Terminal'
+                            REP_MOD_Component:
+
+                Screen:
+                    name:'Admin_Users'
+                    on_enter:Admin_Users_Screen.show_user_on_screen()
+                    MiddlePanel:
+                        do_default_tab:False
+                        MiddlePanelItem:
+                            id:ADMIN_USER_Users
+                            text:'[u]Users[/u]'
+                            on_release:ADMIN_USER_Users.text='[u]Users[/u]'
+                            Admin_Users:
+                                id:Admin_Users_Screen
+
+
+                Screen:
+                    name:'Permission denied'
+                    Access_Denied:
+# <TopPanelItem@TabbedPanel>
+# <TopPanel@TabbedPanel>:
+#     background_image:""
+#     tab_height:'40dp'
+#     tab_width:'140dp' # self.size[0]/8
+#     canvas.before:
+#         Color:
+#             rgba:(1, 92/255, 0, 0.7)
+#         Rectangle:
+#             size:self.size
+#             pos:self.pos
+#
+# <TopPanelItem@TabbedPanelItem>:
+#     border: [1, 1, 1, 1]
+#     bold:True
+#     color:(0,0,0,1)
+#     font_size:'20dp'
+#     background_color:(1,1,1,0)
+
+
+<MiddlePanel@TabbedPanel>:
+    background_image:""
+    tab_width:'140dp'#self.size[0]/8
+    tab_height:'30dp'
+
+<MiddlePanelItem@TabbedPanelItem>:
+    background_color:(1,1,1,0)
+    color:(0,0,0,1)
+    markup:True
+    font_size:'15dp'
+
+<BackgroundLabel@Label+BackgroundColor>:
+    background_color: 0, 0, 0, 0
+
+<FlatButton@ButtonBehavior+Label>:
+    text:'default'
+
+<SideBar>:
+    orientation:'horizontal'
+    BoxLayout:
+        id:Left_Bar
+        orientation:'vertical'
+        canvas.before:
+            Color:
+                rgba:(1, 92/255, 0,1)
+            Rectangle:
+                size:self.size
+                pos:self.pos
+
+        L_B_Spinner:
+            id:Dashboard_Screen
+            text:'Dashboard: Info  '
+            colorcheck:False
+            initial_check:True
+            values:['Dashboard: Info  ']
+            on_text:root.Dashboard_Change()
+
+        L_B_Spinner:
+            id:Inspection_Screen
+            text:'Inspection  '
+            values:['Inspection: Export  ','Inspection: Import  ','Inspection: Modify  ']
+            on_text:root.Inspection_Change()
+
+        L_B_Spinner:
+            id:Report_Screen
+            text:'Report  '
+            values:['Report: Export  ','Report: Import  ','Report: Modify  ']
+            on_text:root.Report_Change()
+
+        L_B_Spinner:
+            id:Admin_Screen
+            text:'Admin  '
+            values:['Admin: Users  ']
+            on_text:root.Admin_Change()
+
+        Label:
+            size_hint_y:0.68
+
+<L_B_Spinner@Spinner>:
+    size_hint_y:0.08
+    color:(0,0,0,1)
+    halign: 'right'
+    valign: 'center'
+    text_size:self.size
+    colorcheck:True
+    bold:True
+    font_size:'18dp'
+    background_color:(1, 92/255, 0,1) if self.colorcheck==True else (1, 245/255, 0,0.4)
+    background_normal:''

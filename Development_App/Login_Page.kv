@@ -1,0 +1,245 @@
+<CoverImage@CoverBehavior+Image>:
+    reference_size: self.texture_size
+
+<BackgroundColor@Widget>:
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+
+#Change password code
+<Change_pwd>:
+    id:change_pwd
+    title:'Change Password'
+    title_size:'15dp'
+    size_hint:None,None
+    size:'500dp','325dp'
+    name:'Email ID check'
+    separator_color:(0.768,0.232,0,1)
+    space_x:self.pos[0]/1.07
+    space_y:self.pos[1]/0.92
+    FloatLayout:
+        GridLayout:
+            rows:6
+            cols:2
+            size_hint_y:None
+            height:'230dp'
+            size_hint_x:None
+            width:'450dp'
+            spacing:'10dp'
+            pos:change_pwd.space_x,change_pwd.space_y
+            Label:
+                text:'Email ID'
+                bold:True
+                font_size:'18dp'
+                size_hint_x:0.1
+                halign: 'right'
+                valign:'center'
+                text_size:self.size
+            TextInput:
+                id:Email_ID_Forgotten_pwd
+                hint_text:'Ex: yourname@lapp.com'
+                font_size:'15dp'
+                multiline:False
+                focus:True
+                size_hint_x:0.9
+                on_text_validate:root.OTP_Send()
+            Label:
+                text:'OTP'
+                bold:True
+                font_size:'18dp'
+                size_hint_x:0.1
+                halign: 'right'
+                valign:'center'
+                text_size:self.size
+            TextInput:
+                id:OTP_input
+                hint_text:'Ex: 123456'
+                font_size:'15dp'
+                multiline:False
+                password:True
+                size_hint_x:0.9
+                disabled:True
+                on_text_validate:root.OTP_Check()
+            Label:
+                text:'New Password'
+                bold:True
+                font_size:'18dp'
+                size_hint_x:0.1
+                halign: 'right'
+                valign:'center'
+                text_size:self.size
+            TextInput:
+                id:Password_new
+                hint_text:'Ex: NewPassword.123'
+                password:True
+                font_size:'15dp'
+                multiline:False
+                size_hint_x:0.9
+                focus:True
+                disabled:True
+                allow_copy:False
+                on_text_validate:Password_confirm.focus=True
+            Label:
+                text:'Confirm Password'
+                bold:True
+                font_size:'18dp'
+                size_hint_x:0.1
+                halign: 'right'
+                valign:'center'
+                text_size:self.size
+            TextInput:
+                id:Password_confirm
+                password:True
+                font_size:'15dp'
+                multiline:False
+                size_hint_x:0.9
+                disabled:True
+                allow_copy:False
+                on_text_validate:root.change_password_kv()
+            Label:
+                text:''
+            BoxLayout:
+                spacing:'10dp'
+                Button:
+                    id:OTP_button
+                    text:'OTP'
+                    bold: True
+                    font_size:'18dp'
+                    color:1,1,1,1
+                    background_color:(128/255,30/255,30/255,1)
+                    background_normal:''
+                    on_release:root.OTP_Send()
+                Button:
+                    id:Confirm_email_button
+                    text:'Submit'
+                    bold: True
+                    font_size:'18dp'
+                    color:1,1,1,1
+                    background_color:(128/255,30/255,30/255,1)
+                    background_normal:''
+                    disabled:True
+                    on_release:root.change_password_kv()
+            Label:
+                text:''
+            Label:
+                id:change_pwd_info
+                font_size:'15dp'
+                halign: 'left'
+                valign:'top'
+                text_size:self.size
+                bold:True
+
+#Login page code
+<LoginPage>:
+    id:Login_Page
+    CoverImage:
+        source:'Design_considerations\Images\Login_page.jpg'
+
+    BoxLayout:
+        orientation:'vertical'
+        spacing:'50dp'
+        padding:self.size[0]/4,0,0,'150dp'
+
+        BoxLayout:
+            size_hint_y:None
+            height:'150dp'
+            size_hint_x:None
+            width:'800dp'
+            Image:
+                source:'Design_considerations\Images\Lapp_Logo.jpg'
+                size_hint_x:0.203
+            BoxLayout:
+                orientation:'vertical'
+                Label:
+                    text:'LAPP India'
+                    font_size:'96dp'
+                    font_name:'Design_considerations\Fonts\GeneralSans-Variable.ttf'
+                    size_hint_x:0.797
+                    size_hint_y:0.8
+                Label:
+                    text:'OLFLEX Connect'
+                    font_size:'20dp'
+                    bold:True
+                    size_hint_x:0.797
+                    size_hint_y:0.2
+                    halign: 'left'
+                    valign:'top'
+                    text_size:self.size
+        GridLayout:
+            rows:4
+            cols:2
+            size_hint_y:None
+            height:'180dp'
+            spacing:'10dp'
+            size_hint_x:None
+            width:'700dp'
+            Label:
+                text:'Email ID'
+                font_size:'30dp'
+                font_name:'Design_considerations\Fonts\GeneralSans-Variable.ttf'
+                size_hint_x:0.367
+            TextInput:
+                id:Username_text_input
+                hint_text:'Ex: yourname@lapp.com'
+                font_size:'20dp'
+                multiline:False
+                size_hint_x:0.533
+                focus:True
+                on_text_validate: Password_text_input.focus =True
+            Label:
+                text:'Password'
+                font_size:'30dp'
+                font_name:'Design_considerations\Fonts\GeneralSans-Variable.ttf'
+                size_hint_x:0.367
+            TextInput:
+                id:Password_text_input
+                hint_text:'Ex: Password123'
+                font_size:'20dp'
+                password:True
+                multiline:False
+                size_hint_x:0.533
+                on_text_validate:root.validate_user_kv()
+            Label:
+                text:''
+                size_hint_x:0.367
+            BoxLayout:
+                spacing:'20dp'
+                Button:
+                    text:'Login'
+                    bold: True
+                    font_size:'18dp'
+                    color:0.768,0.232,0,1
+                    background_color:(0.769,0.769,0.769,1)
+                    background_normal:''
+                    on_release:root.validate_user_kv()
+                Button:
+                    text:'Forgot Password'
+                    bold: True
+                    font_size:'18dp'
+                    color:0.768,0.232,0,1
+                    background_color:(0.769,0.769,0.769,1)
+                    background_normal:''
+                    on_release:Factory.Change_pwd().open()
+            Label:
+                text:''
+                size_hint_x:0.367
+            Label:
+                id:Login_error_text
+                bold:True
+                halign: 'left'
+                valign:'top'
+                text_size:self.size
+                font_size:'18dp'
+                color:1,1,1,1
+
+<Access_Denied@BoxLayout>:
+    Label:
+        text:'Access Not Available'
+        bold:True
+        font_size:'80dp'
+        color:0.768,0.232,0,1

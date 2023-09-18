@@ -1,0 +1,485 @@
+<REP_EXP_Report>
+    id:REP_EXP_Report_id
+    orientation:'vertical'
+
+    BoxLayout:
+
+        GridLayout:
+            id:Work_order_details_holder
+            pos_hint:{'x':0,'top':0.95}
+            cols:2
+            spacing:('30dp','15dp')
+            size_hint:None,None
+            size:'450dp','170dp'
+
+            HolderLabel:
+                text:'Work Order'
+
+            TextInput:
+                id:Word_Order_Number
+                focus:True
+                on_text_validate:root.get_WO_details()
+                multiline:False
+                font_size:'15dp'
+
+            HolderLabel:
+                text:'FG Part Num'
+
+            EmptyLabel:
+                id:FG_Part_Num
+
+            HolderLabel:
+                text:'WO QTY'
+            EmptyLabel:
+                id:WO_QTY
+
+            HolderLabel:
+                text:'JT QTY'
+            TextInput:
+                id:JT_QTY
+                color:(0,0,0,1)
+                disabled:True
+                multiline:False
+                font_size:'15dp'
+                input_filter:'int'
+                on_text_validate:root.QTY_match()
+
+
+
+
+    StackLayout:
+        id:Download_Button_WO
+        orientation:'rl-tb'
+        size_hint_y:None
+        height:'50dp'
+        spacing:'20dp'
+        canvas.before:
+            Color:
+                rgba:(196/255, 196/255, 196/255,0.7)
+            Rectangle:
+                size:self.size
+                pos:self.pos
+
+        Button:
+            id:Confirm_button
+            size_hint_x:None
+            width:'125dp'
+            text:'Submit'
+            font_size:'20dp'
+            on_release:root.get_WO_details() if Confirm_button.text=='Submit' else root.QTY_match()
+            background_color:(128/255, 30/255, 30/255,1)
+            background_normal:''
+        Label:
+            id:Error_label
+            halign: 'right'
+            valign: 'center'
+            text_size:self.size
+            size_hint_x:None
+            width:'250dp'
+            text:''
+            color:(0,0,0,1)
+
+<REP_IMP_WorkOrder>:
+    orientation:'vertical'
+    BoxLayout:
+        GridLayout:
+            cols:2
+            pos_hint:{'x':0,'top':0.95}
+            spacing:'30dp'
+            size_hint:None,None
+            size:'450dp','35dp'
+            HolderLabel:
+                size_hint_x:0.30
+                text:'Input'
+
+            Button:
+                id:file_location_main
+                text:'Choose WO Location'
+                padding:('5dp',0)
+                on_release:root.show_Retrieve_xlsx_file()
+                font_size:'15dp'
+                halign: 'left'
+                valign: 'center'
+                text_size:self.size
+                color:(0,0,0,1)
+                background_color:(196/255, 196/255, 196/255,1)
+                background_normal:''
+
+    StackLayout:
+        id:Download_Button_WO
+        orientation:'rl-tb'
+        size_hint_y:None
+        height:'50dp'
+        spacing:'20dp'
+        canvas.before:
+            Color:
+                rgba:(196/255, 196/255, 196/255,0.7)
+            Rectangle:
+                size:self.size
+                pos:self.pos
+
+        Button:
+            id:Confirm_button
+            size_hint_x:None
+            width:'125dp'
+            text:'Import'
+            font_size:'20dp'
+            on_release:root.confirm_file()
+            background_color:(128/255, 30/255, 30/255,1)
+            background_normal:''
+        Label:
+            id:Error_label
+            halign: 'right'
+            valign: 'center'
+            text_size:self.size
+            size_hint_x:None
+            width:'250dp'
+            text:''
+            color:(0,0,0,1)
+
+
+<Retrieve_xlsx_file>:
+    size: root.size
+    pos: root.pos
+    orientation: "vertical"
+    spacing:'10dp'
+
+    FileChooserIconView:
+        id: filechooser
+        path: "C:/Users"
+        on_selection: file_location.text = self.selection and self.selection[0] or ''
+
+    GridLayout:
+        cols:2
+        pos_hint:{'center_x':0.5,'y':0}
+        size_hint: None, None
+        width:'600dp'
+        height: '80dp'
+        spacing:'10dp'
+
+        HolderLabel:
+            text:'File Location'
+            color:(1,1,1,1)
+        Label:
+            id: file_location
+            color:(0,0,0,1)
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+        HolderLabel:
+            text:''
+        BoxLayout:
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Confirm"
+                on_release: root.confirm(filechooser.selection,file_location.text)
+
+<REP_MOD_Component>:
+
+    size_hint:None,None
+    size:('385dp','540dp')
+    padding:('20dp',0)
+
+    orientation:'vertical'
+    spacing:'2dp'
+    pos_hint:{'x':0,'top':1}
+
+    BoxLayout:
+        size_hint_y:None
+        height:'36.4dp'
+        spacing:'1dp'
+        InputLabel:
+            size_hint_x:None
+            width:'100dp'
+            text:'Component PNO'
+        InputLabel:
+            size_hint_x:None
+            width:'200dp'
+            text:'Description'
+        InputLabel:
+            size_hint_x:None
+            width:'80dp'
+            text:'Cores'
+
+    BoxLayout:
+        spacing:'1dp'
+        size_hint:None,None
+        size:'382dp','364dp'
+
+        SecondaryInputLabel:
+            id:Display_component_Number
+            size_hint:None,None
+            size:('100dp','36.4dp')
+            text:''
+            pos_hint:{'x':0,'top':1}
+
+        SecondaryInputLabel:
+            id:Display_component_Description
+            size_hint:None,None
+            size:('200dp','36.4dp')
+            text:''
+            pos_hint:{'x':0,'top':1}
+
+        RecycleView:
+            id:tablular_data_cores
+            viewclass: 'SecondaryInputLabel'
+
+            RecycleBoxLayout:
+                # cols:1
+                orientation:'vertical'
+                default_size_hint: None, None
+                default_size: '80dp', '36.4dp'
+                spacing:'1dp'
+                size_hint_y: None
+                height:self.minimum_height
+
+    BoxLayout:
+        size_hint_y:None
+        height:'36.4dp'
+        spacing:'1dp'
+
+        InputLabel:
+            size_hint_x:None
+            width:'100dp'
+            text:'Component PNO'
+
+        InputLabel:
+            size_hint_x:None
+            width:'200dp'
+            text:'Description'
+
+        InputLabel:
+            size_hint_x:None
+            width:'80dp'
+            text:'Cores'
+
+    BoxLayout:
+        size_hint_y:None
+        height:'36.4dp'
+        spacing:'1dp'
+
+        ReportTextInput:
+            id:Component_Number
+            size_hint_x:None
+            width:'100dp'
+            on_text_validate:Description.focus=True
+
+        ReportTextInput:
+            id:Description
+            size_hint_x:None
+            width:'200dp'
+            on_text_validate:Core.focus=True
+
+        ReportTextInput:
+            id:Core
+            size_hint_x:None
+            width:'80dp'
+
+    BoxLayout:
+        size_hint:None,None
+        size:'507dp','30dp'
+        spacing:'5dp'
+
+        SelectionButton:
+            text:'Add'
+            on_release:root.Add_details()
+
+        SelectionButton:
+            text:'Retrieve'
+            on_release:root.Retrieve_details()
+
+        SelectionButton:
+            text:'Remove'
+            on_release:root.Remove_details()
+
+        HolderLabel:
+            id:err_label
+            size_hint_x:None
+            width:'120dp'
+            font_size:'12dp'
+            bold:False
+            color:(1,0,0,1)
+            halign:'left'
+
+<REP_MOD_Terminal>:
+
+    cols:2
+    spacing:('30dp','5dp')
+    size_hint:None,None
+    size:'570dp','215dp'
+    padding:('20dp')
+
+    HolderLabel:
+        size_hint_x:None
+        width:'200dp'
+        text:'Terminal Part Number'
+
+    ReportTextInput:
+        id:Terminal_PNO
+        size_hint_x:None
+        width:'300dp'
+        halign:'left'
+        on_text_validate:Terminal_Strip_Length.focus=True
+
+    HolderLabel:
+        size_hint_x:None
+        width:'200dp'
+        text:'Strip Length (in mm)'
+
+    PositiveTextInput:
+        id:Terminal_Strip_Length
+        text:''
+        input_filter:'float'
+        on_text_validate:Terminal_TOLMin.focus=True
+
+    Label:
+        text:''
+
+    BoxLayout:
+        spacing:'3dp'
+        PositiveTextInput:
+            id:Terminal_TOLMin
+            hint_text:'Tol -'
+            input_filter:'float'
+            on_text_validate:Terminal_TOLPlus.focus=True
+
+        PositiveTextInput:
+            id:Terminal_TOLPlus
+            hint_text:'Tol +'
+            input_filter:'float'
+
+    Label:
+        text:''
+        size_hint_y:None
+        height:'30dp'
+        spacing:'5dp'
+    BoxLayout:
+        size_hint_y:None
+        height:'30dp'
+        spacing:'5dp'
+
+        SelectionButton:
+            text:'Add'
+            on_release:root.Add_details()
+
+        SelectionButton:
+            text:'Retrieve'
+            on_release:root.Retrieve_details()
+
+        SelectionButton:
+            text:'Modify'
+            on_release:root.Modify_details()
+
+        SelectionButton:
+            text:'Remove'
+            on_release:root.Remove_details()
+    Label:
+        text:''
+
+    ControlledLabel:
+        id:err_label
+        text:''
+        halign:'left'
+        valign:'top'
+        color:(1,0,0,1)
+
+<REP_MOD_WorkOrder_modify>:
+
+    cols:2
+    spacing:('30dp','5dp')
+    size_hint:None,None
+    size:'570dp','215dp'
+    padding:('20dp')
+
+    HolderLabel:
+        size_hint_x:None
+        width:'200dp'
+        text:'Work Order Number'
+
+    ReportTextInput:
+        id:Work_Order
+        size_hint_x:None
+        width:'300dp'
+        halign:'left'
+        on_text_validate:root.Retrieve_details();Delivered_QTY.focus=True
+
+    HolderLabel:
+        size_hint_x:None
+        width:'200dp'
+        text:'Total QTY'
+
+    EmptyLabel:
+        id:Total_QTY
+
+    HolderLabel:
+        size_hint_x:None
+        width:'200dp'
+        text:'Delivered QTY'
+
+    PositiveTextInput:
+        id:Delivered_QTY
+        text:''
+        input_filter:'float'
+        on_text_validate:root.Modify_details()
+
+    Label:
+        text:''
+        size_hint_y:None
+        height:'30dp'
+        spacing:'5dp'
+    BoxLayout:
+        size_hint_y:None
+        height:'30dp'
+        spacing:'5dp'
+
+        SelectionButton:
+            text:'Retrieve'
+            on_release:root.Retrieve_details()
+
+        SelectionButton:
+            text:'Modify'
+            on_release:root.Modify_details()
+
+    Label:
+        text:''
+
+    ControlledLabel:
+        id:err_label
+        text:''
+        halign:'left'
+        valign:'top'
+        color:(1,0,0,1)
+
+<EmptyLabel@Label>:
+    halign: 'left'
+    valign: 'center'
+    text_size:self.size
+    text:''
+    color:(0,0,0,1)
+    padding:('5dp',0)
+    canvas.before:
+        Color:
+            rgba: (196/255, 196/255, 196/255,1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<HolderLabel@Label>:
+    halign: 'right'
+    valign: 'center'
+    bold:True
+    text_size:self.size
+    font_size:'18dp'
+    color:(0,0,0,1)
+    size_hint_x:0.45
+
+<FixedTextInput>:
+    multiline:False
+    font_size:'15dp'
