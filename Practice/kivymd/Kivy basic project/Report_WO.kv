@@ -1,0 +1,102 @@
+<WO_filechooser>:
+    orientation:'vertical'
+    BoxLayout:
+        GridLayout:
+            cols:2
+            pos_hint:{'x':0,'top':0.95}
+            spacing:'30dp'
+            size_hint:None,None
+            size:'450dp','40dp'
+            HolderLabel:
+                text:'Input'
+            Button:
+                id:file_location_main
+                text:'Choose WO Location.'
+                on_release:root.show_Retrieve_xlsx_file()
+                font_size:'15dp'
+
+    StackLayout:
+        id:Download_Button_WO
+        orientation:'rl-tb'
+        size_hint_y:None
+        height:'50dp'
+        spacing:'20dp'
+        canvas.before:
+            Color:
+                rgba:(196/255, 196/255, 196/255,0.7)
+            Rectangle:
+                size:self.size
+                pos:self.pos
+
+        Button:
+            id:Confirm_button
+            size_hint_x:None
+            width:'125dp'
+            text:'Submit'
+            font_size:'20dp'
+            # on_release:root.get_WO_details() if Confirm_button.text=='Submit' else root.QTY_match()
+            background_color:(128/255, 30/255, 30/255,1)
+            background_normal:''
+        Label:
+            id:Error_label
+            halign: 'right'
+            valign: 'center'
+            text_size:self.size
+            size_hint_x:None
+            width:'250dp'
+            text:''
+            color:(0,0,0,1)
+
+
+<Retrieve_xlsx_file>:
+    size: root.size
+    pos: root.pos
+    orientation: "vertical"
+    spacing:'10dp'
+
+    FileChooserIconView:
+        id: filechooser
+        path: "C:/Users"
+        on_selection: file_location.text = self.selection and self.selection[0] or ''
+
+    GridLayout:
+        cols:2
+        pos_hint:{'center_x':0.5,'y':0}
+        size_hint: None, None
+        width:'600dp'
+        height: '80dp'
+        spacing:'10dp'
+
+        HolderLabel:
+            text:'File Location'
+            color:(1,1,1,1)
+        Label:
+            id: file_location
+            color:(0,0,0,1)
+            canvas.before:
+                Color:
+                    rgba: (1,1,1,1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
+        HolderLabel:
+            text:''
+        BoxLayout:
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Confirm"
+                on_release: root.confirm(file_location.text)
+
+
+<HolderLabel@Label>:
+    halign: 'right'
+    valign: 'center'
+    bold:True
+    text_size:self.size
+    font_size:'18dp'
+    color:(0,0,0,1)
+    size_hint_x:0.45

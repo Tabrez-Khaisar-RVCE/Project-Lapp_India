@@ -1,0 +1,33 @@
+hi:
+<hi@BoxLayout>:
+    # size_hint:None,None
+    orientation:'vertical'
+    BoxLayout:
+        Image:
+            source: 'Design_considerations/Images/Lapp_Logo.jpg'
+        Label:
+            text:'LAPP India'
+    GridLayout:
+        rows:4
+        cols:2
+        Label:
+            text:'Username'
+            font_size:'52dp'
+            font_name:'Kivy basic project/Design_considerations/Fonts/GeneralSans-variable.ttf'
+        TextInput:
+            hint_text:'username'
+            multiline:False
+            size_hint:None,None
+            size:"482dp","48dp"
+            font_size:36
+        Label:
+            text:'Password'
+            font_size:'52dp'
+            font_name:'Kivy basic project/Design_considerations/Fonts/GeneralSans-variable.ttf'
+        TextInput:
+            hint_text:'password'
+            multiline:False
+            size_hint:None,None
+            size:"482dp","48dp"
+            font_size:36
+            password:True

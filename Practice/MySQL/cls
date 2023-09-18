@@ -1,0 +1,18 @@
+
+def Component_availability_db(Component_Number):
+    my_data = []
+    # mycursor.execute("SELECT COUNT(*) FROM Component_Details")
+    # count = mycursor.fetchall()
+    # print(count)
+    # for x in (0, len(count))
+    mycursor.execute(
+        "SELECT Cable_desc,Core_Colour FROM Component_Details WHERE Component_Number=%s", (Component_Number,))
+    data = mycursor.fetchall()
+    print(data)
+    for i in (0, len(data)-1):
+        my_data.append(list(data[i]))
+    my_data.insert(0, "")
+    print(my_data)
+
+
+Component_availability_db("sw218")

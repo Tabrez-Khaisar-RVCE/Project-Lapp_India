@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crimping Report</title>
+</head>
+
+<body>
+    <!--<h1>CRIMPING REPORT</h1>-->
+    <table border="border" style="font-size: 9px" cellspacing="0">
+        <tr>
+            <th width="600" colspan="2" style="font-size: 10px"> <img src="{{url_for('static',filename='img/lapplogo.png')}}"
+                alt="can't display" width="100" height="10"> <br>
+                ÖLFLEX® CONNECT</th>
+            <th width="1200" colspan="5" style="font-size: 12px">Crimping Report</th>
+        </tr>
+        <tr>
+            <th>FG Part Number:</th>
+            <td align="center">{{ w[0] }}</td>
+            <th>WO#:</th>
+            <td align="center">wo_list[0]</td>
+            <th>Job Ticket No.:</th>
+            <td align="center">Job_Ticket_No</td>
+            <th>Part ID/ Packing label</th>
+        </tr>
+        <tr>
+            <th>Description:</th>
+            <td align="center">{{ w[1] }}</td>
+            <th>JT Rel Date:</th>
+            <td align="center">JT_Rel_date</td>
+            <th rowspan="2">Job Ticket Qty:</th>
+            <td rowspan="2" align="center">Job_Ticket_Qty</td>
+            <td rowspan="3"></td>
+        </tr>
+        <tr>
+            <th>Drawing REV #:</th>
+            <td align="center">{{ w[7] }}</td>
+            <th>WO Qty:</th>
+            <td align="center">WO_QTY</td>
+        </tr>
+        <tr>
+            <th>Customer Name:</th>
+            <td align="center">{{ w[2] }}</td>
+            <th>Approved by:</th>
+            <td></td>
+            <th>Special Instruction:</th>
+            <td align="center">{{ w[3] }}</td>
+        </tr>
+    </table>
+
+
+    <table border="border" style="font-size: 8px" cellspacing="0">
+        <tr style="font-size: 9px">
+            <th colspan="1" rowspan="2">Date</th>
+            <th colspan="1" rowspan="2">Cable SL #:</th>
+            <th colspan="1" rowspan="2">Cable Part #:</th>
+            <th colspan="1" rowspan="2">Cut length & Core wore color</th>
+            <th colspan="6">FROM - END</th>
+            <th colspan="6">TO - END</th>
+            <th colspan="3">Type of inspection</th>
+            <th colspan="2">Non-conformance</th>
+            <th colspan="1" rowspan="2">Operator name</th>
+            <th colspan="1" rowspan="2">Operator sign</th>
+            <th colspan="1" rowspan="2">Verified by quality</th>
+            <th colspan="1" rowspan="2">Remarks</th>
+        </tr>
+        <tr style="font-size: 9px">
+            <th colspan="1">Marker details & PN</th>
+            <th width="200" colspan="1">Crimping Specification</th>
+            <th colspan="1">Jacket strip length</th>
+            <th colspan="1">Terminal Traceability No.</th>
+            <th colspan="1">Actual crimp Ht & Pull force</th>
+            <th colspan="1">Crimping machine/Tool No.</th>
+
+            <th colspan="1">Marker details & PN</th>
+            <th width="200" colspan="1">Crimping Specification</th>
+            <th colspan="1">Jacket strip length</th>
+            <th colspan="1">Terminal Traceability No.</th>
+            <th colspan="1">Actual crimp Ht & Pull force</th>
+            <th colspan="1">Crimping machine/Tool No.</th>
+
+            <th colspan="1">QA first piece</th>
+            <th colspan="1">QA patrol</th>
+            <th colspan="1">QA last piece</th>
+
+            <th colspan="1">Defect code</th>
+            <th colspan="1">QTY</th>
+
+        </tr>
+        {% for i in y %}
+        <tr>
+            <td></td>
+            <td>{{ i[1] }}</td>  <!--<td>{{Cable_SL}}</td>-->
+            <td>{{ i[0] }}</td>  <!--<td>{{Cable_PN}}</td>-->
+            <td>{{ i[4]}} <br>{{ i[8] }}</td>  <!--<td>{{Cut_color}}</td>-->
+            <td>{{ i[1] }} <br>{{ i[0] }}</td>
+            <td>{{ i[3] }} <br>
+                {{ i[4] }} <br>
+                {{ i[5] }} <br>
+                {{ i[6] }} <br>
+                {{ i[7] }} <br>
+                NEED 1 FIELD</td>
+            <td>{{ i[8] }}</td>
+            <td></td> <!-- 3501094916 -->
+            <td></td> <!-- 27mm 12.6kg -->
+            <td>{{ i[8] }}</td>
+            <td>{{ i[9] }} <br>{{ i[10] }}</td>
+            <td>{{ i[11] }}<br>
+                {{ i[12] }}<br>
+                {{ i[13] }}<br>
+                {{ i[14] }}<br>
+                {{ i[15] }}<br>
+                NEED I FIELD</td>
+            <td>{{ i[8] }}</td>
+            <td></td> <!-- 7000005598 -->
+            <td></td> <!-- 5.3mm 16.3kg -->
+            <td>{{ i[16] }}</td>
+            <td></td> <!-- -->
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+        </tr>
+      {% endfor %}
+    </table>
+    <table border="border" style="font-size:9px" cellspacing="0">
+        <tr>
+            <th colspan="12" style="font-size:11px">Defects Code / Visual Defects</th>
+        </tr>
+        <tr >
+            <td width="200px">01)Terminal Damage</td>
+            <td width="200px">02)Low Core</td>
+            <td width="200px">03)High Core</td>
+            <td width="200px">04)Copper Leakage</td>
+            <td width="200px">05)Wrong Terminal Crimping</td>
+            <td width="200px">06)Lock Damage</td>
+            <td width="200px">07)Terminal Bend</td>
+            <td width="200px">08)Loose crimping</td>
+        </tr>
+        <tr>
+            <td>09)Terminal Twist</td>
+            <td>10)Setup Rejections</td>
+            <td>11)Terminal missing</td>
+            <td>12)Bellmouth Defects</td>
+            <td>13)Tip Excess</td>
+            <td>14)Shem defects</td>
+            <td>15)Burr</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,256 @@
+
+<REP_MOD_Machine_Tool>:
+
+    size_hint:1,None
+    height:'540dp'
+    padding:('20dp',0,0,0)
+
+    orientation:'vertical'
+    spacing:'2dp'
+    pos_hint:{'x':0,'top':1}
+
+    canvas.before:
+        Color:
+            rgba:(1,1,1,1)
+        Rectangle:
+            size:self.size
+            pos:self.pos
+
+# plant id, plant id,plant id,plant id, operation type, machine type, machine tool id
+    ScrollView:
+        size_hint_y:0.75
+        do_scroll_y:False
+
+        BoxLayout:
+            spacing:'1dp'
+            size_hint_x:None
+            width:self.minimum_width
+            orientation:'vertical'
+
+            BoxLayout:
+                id:pizza
+                size_hint_y:None
+                height:'36.4dp'
+                spacing:'1dp'
+                size_hint_x:None
+                width:self.minimum_width
+
+                InputLabel:
+                    size_hint_x:None
+                    width:'150dp'
+                    text:'Opertation Type'
+                InputLabel:
+                    size_hint_x:None
+                    width:'200dp'
+                    text:'Machine Type'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Machine Tool ID'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Plant ID 8235'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Plant ID 8261'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Plant ID 8233'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Plant ID 8273'
+
+            RecycleView:
+                id:tablular_data_cores
+                viewclass: 'SecondaryInputLabel'
+                do_scroll_x:False
+
+                RecycleGridLayout:
+                    cols:7
+                    default_size_hint: None, None
+                    default_size: '100dp', '36.4dp'
+                    spacing:'1dp'
+                    size_hint_y: None
+                    height:self.minimum_height
+
+    ScrollView:
+        size_hint_y:0.25
+        do_scroll_y:False
+
+        BoxLayout:
+            spacing:'1dp'
+            size_hint_x:None
+            width:self.minimum_width
+            orientation:'vertical'
+            # height:'164dp'
+
+            BoxLayout:
+                size_hint_y:None
+                height:'36.4dp'
+                spacing:'1dp'
+                size_hint_x:None
+                width:self.minimum_width
+
+                InputLabel:
+                    size_hint_x:None
+                    width:'150dp'
+                    text:'Opertation Type'
+                InputLabel:
+                    size_hint_x:None
+                    width:'200dp'
+                    text:'Machine Type'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Machine Tool ID'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Plant ID 8235'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Plant ID 8261'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Plant ID 8233'
+                InputLabel:
+                    size_hint_x:None
+                    width:'100dp'
+                    text:'Plant ID 8273'
+
+            BoxLayout:
+                size_hint_y:None
+                height:'36.4dp'
+                spacing:'1dp'
+                size_hint_x:None
+                width:self.minimum_width
+
+                Spinner:
+                    id:Operation_Type
+                    size_hint_x:None
+                    width:'150dp'
+                    font_size:'15dp'
+                    text:''
+                    values:['Cutting','Crimping','Assembly']
+
+                ReportTextInput:
+                    id:Machine_Type
+                    size_hint_x:None
+                    width:'200dp'
+                ReportTextInput:
+                    id:Machine_Tool_ID
+                    size_hint_x:None
+                    width:'100dp'
+                ReportTextInput:
+                    id:Plant_ID_8235
+                    size_hint_x:None
+                    width:'100dp'
+                ReportTextInput:
+                    id:Plant_ID_8261
+                    size_hint_x:None
+                    width:'100dp'
+                ReportTextInput:
+                    id:Plant_ID_8233
+                    size_hint_x:None
+                    width:'100dp'
+                ReportTextInput:
+                    id:Plant_ID_8273
+                    size_hint_x:None
+                    width:'100dp'
+
+    BoxLayout:
+        size_hint:None,None
+        size:'507dp','30dp'
+        spacing:'5dp'
+
+        SelectionButton:
+            text:'Add'
+            on_release:root.Add_details()
+
+        SelectionButton:
+            text:'Retrieve'
+            on_release:root.Retrieve_details()
+
+        SelectionButton:
+            text:'Remove'
+            on_release:root.Remove_details()
+
+        SelectionButton:
+            text:'Modify'
+            on_release:root.Modify_details()
+
+        HolderLabel:
+            id:err_label
+            size_hint_x:None
+            width:'120dp'
+            font_size:'12dp'
+            bold:False
+            color:(1,0,0,1)
+            halign:'left'
+
+<SelectionButton@Button>:
+    background_color:(0.501961, 0.117647, 0.117647, 1)
+    background_normal:''
+    color:(1,1,1,1)
+    bold:True
+    font_size:'15dp'
+
+<ControlledLabel@Label>:
+    halign: 'center'
+    valign: 'center'
+    text_size:self.size
+    text:''
+    color:(0,0,0,1)
+    font_size:'12dp'
+
+<HolderLabel@Label>:
+    halign: 'right'
+    valign: 'center'
+    bold:True
+    text_size:self.size
+    font_size:'18dp'
+    color:(0,0,0,1)
+    size_hint_x:0.45
+
+<EmptyLabel@Label>:
+    halign: 'left'
+    valign: 'center'
+    text_size:self.size
+    text:''
+    color:(0,0,0,1)
+    padding:('5dp',0)
+    canvas.before:
+        Color:
+            rgba: (196/255, 196/255, 196/255,1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<InputLabel@ControlledLabel>:
+    unique_color:(0.5, 1, 1, 1)
+    canvas.before:
+        Color:
+            rgba: self.unique_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<SecondaryInputLabel@InputLabel>:
+    unique_color:(0.85, 0.85, 0.85, 1)
+
+<FixedTextInput>:
+    multiline:False
+    font_size:'15dp'
+
+<ReportTextInput@FixedTextInput>:
+    size_hint_x:None
+    font_size:'15dp'
+    halign: 'center'
+    valign: 'center'
+    text_size:self.size

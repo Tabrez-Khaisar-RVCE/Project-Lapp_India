@@ -1,0 +1,367 @@
+<Crimping_table_Input>:
+    orientation:'vertical'
+    BoxLayout:
+        RecycleView:
+            id:tablular_data
+            viewclass: 'InputLabel'
+            canvas.before:
+                Color:
+                    rgba: (1, 196/255, 196/255,1)
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            # color:(1,0,1,1)
+            RecycleGridLayout:
+                id: burger2
+                cols:17
+                default_size_hint: None, None
+                default_size: '75dp', '50dp'
+                spacing:'5dp'
+                size_hint: None,None
+                size: self.minimum_width, self.minimum_height
+
+                # canvas.before:
+                #     Color:
+                #         rgba: (0, 1, 1,1)
+                #     Rectangle:
+                #         size: self.size
+                #         pos: self.pos
+
+    BoxLayout:
+        orientation:'vertical'
+        canvas.before:
+            Color:
+                rgba: (1, 1, 1, 1)
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        ScrollView:
+            size_hint_y:None
+            height:'110dp'
+
+            BoxLayout:
+                orientation:'vertical'
+                size_hint_x:None
+                width:self.minimum_width
+
+                BoxLayout:
+                    size_hint_x:None
+                    width:self.minimum_width
+                    spacing:'1dp'
+
+                    canvas.before:
+                        Color:
+                            rgba: (1, 1, 1, 1)
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+
+                    InputLabel:
+                        size_hint_x:None
+                        width:'50dp'
+                        text:'Core SL#'
+
+                    InputLabel:
+                        size_hint_x:None
+                        width:'60dp'
+                        text:'Core wire color'
+
+                    BoxLayout:
+                        orientation:'vertical'
+                        size_hint_x:None
+                        width:'576dp'
+                        spacing:'1dp'
+
+                        InputLabel:
+                            text:'From End'
+                            bold:True
+
+                        BoxLayout:
+                            spacing:'1dp'
+                            InputLabel:
+                                size_hint_x:None
+                                width:'80dp'
+                                text:'Marker details and PN'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'80dp'
+                                text:'Crimp type'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'80dp'
+                                text:'Terminal PNO'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'50dp'
+                                text:'Crimp height ? Tol'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'50dp'
+                                text:'Pull Force'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'150dp'
+                                text:'Crimp Instruction'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'80dp'
+                                text:'Crimp Tool'
+
+                    BoxLayout:
+                        orientation:'vertical'
+                        size_hint_x:None
+                        width:'576dp'
+                        spacing:'1dp'
+
+                        InputLabel:
+                            text:'To End'
+                            bold:True
+
+                        BoxLayout:
+                            spacing:'1dp'
+                            InputLabel:
+                                size_hint_x:None
+                                width:'80dp'
+                                text:'Marker details and PN'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'80dp'
+                                text:'Crimp type'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'80dp'
+                                text:'Terminal PNO'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'50dp'
+                                text:'Crimp height ? Tol'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'50dp'
+                                text:'Pull Force'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'150dp'
+                                text:'Crimp Instruction'
+
+                            InputLabel:
+                                size_hint_x:None
+                                width:'80dp'
+                                text:'Crimp Tool'
+
+                    InputLabel:
+                        size_hint_x:None
+                        width:'50dp'
+                        text:'Assembly ?'
+
+                BoxLayout:
+                    size_hint_y:None
+                    height:'40dp'
+                    padding:(0,'2dp')
+                    spacing:'1dp'
+                    ReportTextInput:
+                        id:Cable_SL
+                        width:'50dp'
+                        on_text_validate:CI_CableDesc.focus=True
+
+                    ReportTextInput:
+                        id:CableCoreColor
+                        width:'60dp'
+                        # hint_text:'Cable Description'
+                        on_text_validate:CI_CoreWireColor.focus=True
+
+                    ReportTextInput:
+                        id:MarkerDetails
+                        width:'80dp'
+                        # hint_text:'Core Wire color'
+                        on_text_validate:CI_QTY.focus=True
+
+                    PositiveTextInput:
+                        id:CrimpType
+                        width:'80dp'
+                        # hint_text:'QTY'
+                        on_text_validate:CI_CutTool.focus=True
+                        input_filter:'int'
+
+                    ReportTextInput:
+                        id:CI_CutTool
+                        width:'80dp'
+                        # hint_text:'Machine/Tool'
+                        on_text_validate:CI_Cut.focus=True
+
+                    ReportTextInput:
+                        id:CI_Cut
+                        size_hint_x:None
+                        width:'50dp'
+                        # hint_text:'Cable Cut Length in mm'
+                        on_text_validate:CI_Cut_TOLMin.focus=True
+                        input_filter:'float'
+
+                    PositiveTextInput:
+                        id:CI_Cut_TOLMin
+                        size_hint_x:None
+                        width:'50dp'
+                        # hint_text:'TOL -'
+                        on_text_validate:CI_Cut_TOLPlus.focus=True
+                        input_filter:'float'
+
+                    PositiveTextInput:
+                        id:CI_Cut_TOLPlus
+                        size_hint_x:None
+                        width:'150dp'
+                        # hint_text:'TOL +'
+                        on_text_validate:CI_JacketTool.focus=True
+                        input_filter:'float'
+
+                    ReportTextInput:
+                        id:CI_JacketTool
+                        width:'80dp'
+                        # hint_text:'Jacket remove tool'
+                        on_text_validate:CI_JFE.focus=True
+
+                    ReportTextInput:
+                        id:CI_JFE
+                        size_hint_x:None
+                        width:'80dp'
+                        # hint_text:'Jacket FE cut length'
+                        on_text_validate:CI_JFE_TOLMin.focus=True
+                        input_filter:'float'
+
+                    PositiveTextInput:
+                        id:CI_JFE_TOLMin
+                        size_hint_x:None
+                        width:'80dp'
+                        # hint_text:'TOL -'
+                        on_text_validate:CI_JFE_TOLPlus.focus=True
+                        input_filter:'float'
+
+                    PositiveTextInput:
+                        id:CI_JFE_TOLPlus
+                        size_hint_x:None
+                        width:'80dp'
+                        # hint_text:'TOL +'
+                        on_text_validate:CI_JTE.focus=True
+                        input_filter:'float'
+
+                    ReportTextInput:
+                        id:CI_JTE
+                        size_hint_x:None
+                        width:'50dp'
+                        # hint_text:'Jacket TE cut length'
+                        on_text_validate:CI_JTE_TOLMin.focus=True
+                        input_filter:'float'
+
+                    PositiveTextInput:
+                        id:CI_JTE_TOLMin
+                        size_hint_x:None
+                        width:'50dp'
+                        # hint_text:'TOL -'
+                        on_text_validate:CI_JTE_TOLPlus.focus=True
+                        input_filter:'float'
+
+                    PositiveTextInput:
+                        id:CI_JTE_TOLPlus
+                        size_hint_x:None
+                        width:'150dp'
+                        # hint_text:'TOL +'
+                        on_text_validate:CI_StripTool.focus=True
+                        input_filter:'float'
+
+                    ReportTextInput:
+                        id:CI_StripTool
+                        width:'80dp'
+                        # hint_text:'Stripping tool'
+                        on_text_validate:CI_SFE.focus=True
+
+                    CheckBox:
+                        id:CI_CrI
+                        width:'50dp'
+                        color:(1,0,1,1)
+                        # on_active:root.crimpcheck(self)
+
+        BoxLayout:
+            size_hint_y:None
+            height:'30dp'
+            spacing:'5dp'
+            SelectionButton:
+                id:Add_cut_data
+                size_hint_x:None
+                width:'100dp'
+                text:'Add'
+                on_release:root.cutting_data()
+            SelectionButton:
+                text:'Retrieve'
+                size_hint_x:None
+                width:'100dp'
+                on_release:root.retrieve_cutting_data()
+            SelectionButton:
+                text:'Remove'
+                size_hint_x:None
+                width:'100dp'
+                on_release:root.remove_cutting_data()
+            SelectionButton:
+                text:'Modify'
+                size_hint_x:None
+                width:'100dp'
+                on_release:root.modify_cutting_data()
+            ControlledLabel:
+                id:err_label
+                text:''
+                color:(1,0,0,1)
+                size_hint_x:None
+                width:'350dp'
+                halign: 'left'
+
+<ControlledLabel@Label>:
+    halign: 'center'
+    valign: 'center'
+    text_size:self.size
+    text:''
+    color:(0,0,0,1)
+    font_size:'12dp'
+
+<InputLabel@ControlledLabel>:
+    unique_color:(0.5, 1, 1, 1)
+    canvas.before:
+        Color:
+            rgba: self.unique_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<ReportTextInput@FixedTextInput>:
+    size_hint_x:None
+    font_size:'12dp'
+    halign: 'center'
+    valign: 'center'
+    text_size:self.size
+
+<FixedTextInput>:
+    multiline:False
+    font_size:'15dp'
+
+<PositiveTextInput>:
+    size_hint_x:None
+    font_size:'15dp'
+    halign: 'center'
+    valign: 'center'
+    text_size:self.size
+
+<SelectionButton@Button>:
+    background_color:(128/255, 30/255, 30/255, 1)
+    background_normal:''
+    color:(1,1,1,1)
+    bold:True
+    font_size:'15dp'

@@ -1,0 +1,80 @@
+#: import Layout_example Layout_example
+#: import Widget_example Widget_example
+#: import Navigation_screen_manager Navigation_screen_manager
+#: import Boxlayout_with_action_bar Boxlayout_with_action_bar
+
+<MainMenu@BoxLayout>:
+    orientation:'vertical'
+    Button:
+        text:'Page_Layout'
+        on_press:app.manager.push('Screen_1')
+    Button:
+        text:'Images'
+        on_press:app.manager.push('Screen_2')
+    Button:
+        text:'Images'
+        on_press:app.manager.push('Screen_3')
+    # Screen:
+    #     name:'Screen_1'
+    #     Boxlayoutwithactionbar:
+    #         title:'Page_Layout'
+    #         PageLayoutExample:
+    # Screen:
+    #     name:'Screen_2'
+    #     Boxlayoutwithactionbar:
+    #         title:'Page_Layout'
+    #         LayoutExampleTabs:
+    #
+    #
+    # Screen:
+    #     name:'Screen_3'
+    #     Boxlayoutwithactionbar:
+    #         title:'Page_Layout'
+    #         ImagesExample:
+
+<The_screen_2>:
+    Screen:
+        name:'Main Menu'
+        MainMenu:
+    Screen:
+        name:'Screen_2'
+        Boxlayoutwithactionbar:
+            title:'Images'
+            ImagesExample:
+
+    Screen:
+        name:'Screen_3'
+        Boxlayoutwithactionbar:
+            title:'Stack in scroll'
+            ScrollViewExample
+
+<The_screen@ScreenManager>:
+    Screen:
+        name:"Screen_1"
+        Button:
+            text:'Next screen'
+            on_press:root.transition.direction='left';root.current='Screen_2'
+    Screen:
+        name:'Screen_2'
+        ImagesExample
+        Button:
+            size_hint:None,None
+            size:'100dp','20dp'
+            pos_hint:{'x':0,'y':0}
+            text:'Prev screen'
+            on_press:root.transition.direction='right';root.current=root.previous()
+        Button:
+            size_hint:None,None
+            size:'100dp','20dp'
+            pos_hint:{'right':1,'bottom':1}
+            text:'Next screen'
+            on_press:root.transition.direction='left';root.current='Screen_3'
+    Screen:
+        name:'Screen_3'
+        StackLayoutExample
+        Button:
+            size_hint:None,None
+            size:'100dp','20dp'
+            pos_hint:{'x':0,'y':0}
+            text:'Prev screen'
+            on_press:root.transition.direction='right';root.current=root.previous()
